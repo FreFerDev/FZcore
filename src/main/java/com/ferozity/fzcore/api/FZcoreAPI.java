@@ -6,7 +6,8 @@ import com.ferozity.fzcore.utils.ActionBarUtil;
 import com.ferozity.fzcore.utils.ColorUtil;
 import com.ferozity.fzcore.utils.SoundUtil;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.configuration.file.FileConfiguration;
+import java.io.File;
 
 public class FZcoreAPI {
 
@@ -33,11 +34,11 @@ public class FZcoreAPI {
     }
 
     public boolean registerExternalModule(Module module) {
-        return plugin.getModuleManager().registerExternalModule(module);
+        return plugin.getModuleManager().registerModule(module);
     }
 
     public void unregisterExternalModule(String moduleName) {
-        plugin.getModuleManager().unregisterExternalModule(moduleName);
+        plugin.getModuleManager().unregisterModule(moduleName);
     }
 
     public boolean isModuleEnabled(String moduleName) {
@@ -54,5 +55,21 @@ public class FZcoreAPI {
 
     public void reloadAllModules() {
         plugin.getModuleManager().reloadAllModules();
+    }
+    
+    public FileConfiguration getModuleConfig(String moduleName) {
+        return plugin.getConfigManager().getModuleConfig(moduleName);
+    }
+    
+    public File getCoreFolder() {
+        return plugin.getConfigManager().getCoreFolder();
+    }
+    
+    public File getConfigsFolder() {
+        return plugin.getConfigManager().getConfigsFolder();
+    }
+    
+    public void saveModuleConfig(String moduleName, FileConfiguration config) {
+        plugin.getConfigManager().saveModuleConfig(moduleName, config);
     }
 }
