@@ -4,7 +4,6 @@ import com.ferozity.fzcore.commands.FZCommand;
 import com.ferozity.fzcore.commands.FZTabCompleter;
 import com.ferozity.fzcore.core.ConfigManager;
 import com.ferozity.fzcore.core.ModuleManager;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
@@ -17,7 +16,9 @@ public final class FZcore extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        saveDefaultConfigs();
+        
+        createDataFolder();
+        
         this.configManager = new ConfigManager(this);
         this.moduleManager = new ModuleManager(this);
         
@@ -25,41 +26,30 @@ public final class FZcore extends JavaPlugin {
         getCommand("fz").setTabCompleter(new FZTabCompleter(this));
         
         getLogger().info("=========================");
+        getLogger().info("FZcore v" + getDescription().getVersion() + " enabled");
+        
         moduleManager.loadModules();
+        
         getLogger().info("=========================");
     }
 
     @Override
     public void onDisable() {
         if (moduleManager != null) {
-            moduleManager.disableModules();
+            moduleManager.disableAllModules();
+            moduleManager.saveState();
         }
+        getLogger().info("FZcore disabled");
     }
-
-    private void saveDefaultConfigs() {
+    
+    private void createDataFolder() {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdirs();
         }
-        saveDefaultModuleConfig();
-        saveCoreMessages();
         
         File configsDir = new File(getDataFolder(), "configs");
         if (!configsDir.exists()) {
             configsDir.mkdirs();
-        }
-    }
-
-    private void saveDefaultModuleConfig() {
-        File modulesFile = new File(getDataFolder(), "modules.yml");
-        if (!modulesFile.exists()) {
-            saveResource("modules.yml", false);
-        }
-    }
-
-    private void saveCoreMessages() {
-        File coreMessages = new File(getDataFolder(), "core.yml");
-        if (!coreMessages.exists()) {
-            saveResource("core.yml", false);
         }
     }
 

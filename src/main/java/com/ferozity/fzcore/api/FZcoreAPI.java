@@ -7,6 +7,8 @@ import com.ferozity.fzcore.utils.ColorUtil;
 import com.ferozity.fzcore.utils.SoundUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.scheduler.BukkitTask;
 import java.io.File;
 
 public class FZcoreAPI {
@@ -71,5 +73,17 @@ public class FZcoreAPI {
     
     public void saveModuleConfig(String moduleName, FileConfiguration config) {
         plugin.getConfigManager().saveModuleConfig(moduleName, config);
+    }
+    
+    public void registerCommand(String moduleName, String commandName, CommandExecutor executor) {
+        plugin.getModuleManager().registerModuleCommand(moduleName, commandName, executor);
+    }
+    
+    public BukkitTask runTaskTimer(String moduleName, Runnable task, long delay, long period) {
+        return plugin.getModuleManager().runTaskTimer(moduleName, task, delay, period);
+    }
+    
+    public void cancelTasks(String moduleName) {
+        plugin.getModuleManager().cancelAllModuleTasks(moduleName);
     }
 }

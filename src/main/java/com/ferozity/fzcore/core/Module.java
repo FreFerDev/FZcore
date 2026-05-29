@@ -8,7 +8,7 @@ public interface Module {
 
     void onDisable();
 
-    String getName();
+    String getModuleName();
 
     String getVersion();
 

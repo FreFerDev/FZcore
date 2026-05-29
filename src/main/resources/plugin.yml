@@ -1,8 +1,8 @@
 name: FZcore
-version: 1.0
+version: 1.0.0
 main: com.ferozity.fzcore.FZcore
 api-version: "1.21"
-author: FreFer
+author: FeroZity
 description: Core plugin for FeroZity modules
 load: STARTUP
 
@@ -10,7 +10,7 @@ commands:
   fz:
     description: Main FZcore command
     aliases: [fzcore]
-    usage: /fz <reload|modules>
+    usage: /fz <modules|enable|disable|reload>
 
 permissions:
   fz.*:
