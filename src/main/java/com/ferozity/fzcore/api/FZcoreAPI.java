@@ -1,0 +1,58 @@
+package com.ferozity.fzcore.api;
+
+import com.ferozity.fzcore.FZcore;
+import com.ferozity.fzcore.core.Module;
+import com.ferozity.fzcore.utils.ActionBarUtil;
+import com.ferozity.fzcore.utils.ColorUtil;
+import com.ferozity.fzcore.utils.SoundUtil;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class FZcoreAPI {
+
+    private final FZcore plugin;
+
+    public FZcoreAPI(FZcore plugin) {
+        this.plugin = plugin;
+    }
+
+    public static FZcoreAPI getInstance() {
+        return new FZcoreAPI(FZcore.getInstance());
+    }
+
+    public void sendActionBar(Player player, String message) {
+        ActionBarUtil.send(player, message);
+    }
+
+    public void playSound(Player player, org.bukkit.Sound sound, float volume, float pitch) {
+        SoundUtil.playSound(player, sound, volume, pitch);
+    }
+
+    public String colorize(String message) {
+        return ColorUtil.colorize(message);
+    }
+
+    public boolean registerExternalModule(Module module) {
+        return plugin.getModuleManager().registerExternalModule(module);
+    }
+
+    public void unregisterExternalModule(String moduleName) {
+        plugin.getModuleManager().unregisterExternalModule(moduleName);
+    }
+
+    public boolean isModuleEnabled(String moduleName) {
+        return plugin.getModuleManager().isModuleEnabled(moduleName);
+    }
+
+    public Module getModule(String moduleName) {
+        return plugin.getModuleManager().getModule(moduleName);
+    }
+
+    public String getVersion() {
+        return plugin.getDescription().getVersion();
+    }
+
+    public void reloadAllModules() {
+        plugin.getModuleManager().reloadAllModules();
+    }
+}
