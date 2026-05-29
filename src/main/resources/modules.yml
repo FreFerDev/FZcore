@@ -1,0 +1,8 @@
+# =====================================================
+#                   FZcore Module Manager
+# =====================================================
+# Set 'enabled: true' to activate a module
+# =====================================================
+
+# Add automatically your modules here
+modules: {}

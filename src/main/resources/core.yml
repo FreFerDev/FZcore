@@ -1,0 +1,17 @@
+# =====================================================
+#               FZcore Core Messages
+# =====================================================
+# Edit these messages to customize command output
+# Use & for color codes or &#RRGGBB for hex colors
+# =====================================================
+
+commands:
+  help-header: "&6=== FZcore Help ==="
+  help-reload: "&e/fz reload &7- Reload all modules"
+  help-modules: "&e/fz modules &7- List all modules and their status"
+  reload-success: "&aAll modules have been reloaded successfully!"
+  modules-header: "&6=== FZcore Modules ==="
+  module-enabled: "&a✔ Enabled"
+  module-disabled: "&c✘ Disabled"
+  module-format: "&7- &e{module} &7: {status}"
+  no-permission: "&cYou don't have permission to do this."
